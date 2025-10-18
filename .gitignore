@@ -1,3 +1,4 @@
 # .gitignore content
 /grub-tracker-server/node_modules
 /grub-tracker-server/.env
+/grub_checklist.html.old
