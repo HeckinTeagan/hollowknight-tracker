@@ -1,446 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hollow Knight Grub Checklist</title>
-    <style>
-        /* --- ADDED AUTH STYLING --- */
-        #auth-container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #777;
-            border-radius: 8px;
-            background-color: rgba(0, 0, 0, 0.85); /* Added dark opacity for readability */
-            text-align: center;
-        }
-        #auth-container input {
-            width: 90%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #555;
-            background-color: #333;
-            color: #eee;
-            border-radius: 4px;
-        }
-        #auth-container button {
-            width: 95%;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        #auth-container button:hover {
-            background-color: #4cae4c;
-        }
-        #logout-button {
-            float: right;
-            padding: 8px 15px;
-            margin-bottom: 20px;
-            background-color: #d9534f;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        /* --- EXISTING STYLES --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            
-            /* 🖼️ NEW BACKGROUND IMAGE STYLES */
-            background-image: url('https://static.wikia.nocookie.net/hollowknight/images/f/f2/Screenshot_HK_Grubs_01.png');
-            background-color: #333; /* Fallback color */
-            background-size: cover; /* Ensures the image covers the entire screen */
-            background-position: center;
-            background-attachment: fixed; /* Keeps the image still when scrolling */
-            
-            color: #eee;
-            margin: 20px;
-        }
-        h1, h2, h3 {
-            color: #ddd;
-            border-bottom: 2px solid #555;
-            padding-bottom: 5px;
-        }
-        /* ... (rest of existing styles) ... */
-        .grub-area {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #555;
-            border-radius: 5px;
-            background-color: rgba(0, 0, 0, 0.7); /* Added dark opacity for readability */
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            padding: 5px 0;
-            display: flex;
-            align-items: center;
-        }
-        input[type="checkbox"] {
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-        .grub-item-text {
-            flex-grow: 1;
-        }
-        .checked-item .grub-item-text {
-            text-decoration: line-through;
-            color: #888;
-        }
-        .reward-list {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hollow Knight Grub Checklist</title>
+    <style>
+        /* --- ADDED AUTH STYLING --- */
+        #auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #777;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.85); /* Added dark opacity for readability */
+            text-align: center;
+        }
+        #auth-container input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #555;
+            background-color: #333;
+            color: #eee;
+            border-radius: 4px;
+        }
+        #auth-container button {
+            width: 95%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #auth-container button:hover {
+            background-color: #4cae4c;
+        }
+        #logout-button {
+            float: right;
+            padding: 8px 15px;
+            margin-bottom: 20px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        /* --- EXISTING STYLES --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+            /* 🖼️ NEW BACKGROUND IMAGE STYLES */
+            background-image: url('https://static.wikia.nocookie.net/hollowknight/images/f/f2/Screenshot_HK_Grubs_01.png');
+            background-color: #333; /* Fallback color */
+            background-size: cover; /* Ensures the image covers the entire screen */
+            background-position: center;
+            background-attachment: fixed; /* Keeps the image still when scrolling */
+            
+            color: #eee;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #ddd;
+            border-bottom: 2px solid #555;
+            padding-bottom: 5px;
+        }
+        /* ... (rest of existing styles) ... */
+        .grub-area {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.7); /* Added dark opacity for readability */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .grub-item-text {
+            flex-grow: 1;
+        }
+        .checked-item .grub-item-text {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .reward-list {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+    </style>
 </head>
 <body>
 
-    <div id="auth-container">
-        <h2>Welcome Back, Knight</h2>
-        <div id="message-area" style="color: yellow; margin-bottom: 15px;"></div>
-        
-        <form id="login-form">
-            <h3>Login</h3>
-            <label for="login-username">Username:</label>
-            <input type="text" id="login-username" required><br>
-            <label for="login-password">Password:</label>
-            <input type="password" id="login-password" required><br>
-            <button type="submit">Login</button>
-            <hr>
-            <p>No account? <a href="#" id="show-signup-link">Sign Up</a></p>
-        </form>
-        
-        <form id="signup-form" style="display: none;">
-            <h3>Create Account</h3>
-            <label for="signup-username">Username:</label>
-            <input type="text" id="signup-username" required><br>
-            <label for="signup-password">Password:</label>
-            <input type="password" id="signup-password" required><br>
+    <div id="auth-container">
+        <h2>Welcome Back, Knight</h2>
+        <div id="message-area" style="color: yellow; margin-bottom: 15px;"></div>
+        
+        <form id="login-form">
+            <h3>Login</h3>
+            <label for="login-username">Username:</label>
+            <input type="text" id="login-username" required><br>
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" required><br>
+            <button type="submit">Login</button>
+            <hr>
+            <p>No account? <a href="#" id="show-signup-link">Sign Up</a></p>
+        </form>
+        
+        <form id="signup-form" style="display: none;">
+            <h3>Create Account</h3>
+            <label for="signup-username">Username:</label>
+            <input type="text" id="signup-username" required><br>
+            <label for="signup-password">Password:</label>
+            <input type="password" id="signup-password" required><br>
+            <button type="submit">Sign Up</button>
+            <hr>
+            <p>Already have an account? <a href="#" id="show-login-link">Login</a></p>
+        </form>
+    </div>
 
-                        <label for="signup-confirm-password">Confirm Password:</label>
-            <input type="password" id="signup-confirm-password" required><br>
-                        <button type="submit">Sign Up</button>
-            <hr>
-            <p>Already have an account? <a href="#" id="show-login-link">Login</a></p>
-        </form>
-    </div>
+    <div id="checklist-container" style="display: none;">
+        <button id="logout-button">Logout</button>
+        
+        <h1>Hollow Knight Grub Checklist (46 Total)</h1>
 
-    <div id="checklist-container" style="display: none;">
-        <button id="logout-button">Logout</button>
-        
-        <h1>Hollow Knight Grub Checklist (46 Total)</h1>
+        <div id="grub-counter" style="margin-bottom: 20px; font-size: 1.2em; color: #5cb85c;">
+            Grubs Rescued: 0 / 46
+        </div>
+        <div id="grub-list-container">
+        </div>
 
-        <div id="grub-counter" style="margin-bottom: 20px; font-size: 1.2em; color: #5cb85c;">
-            Grubs Rescued: 0 / 46
-        </div>
-        <div id="grub-list-container">
-        </div>
+        <h2>Grub Rewards (from Grubfather)</h2>
+        <ul class="reward-list">
+            <li>**5 Grubs:** Mask Shard</li>
+            <li>**10 Grubs:** Grubsong Charm</li>
+            <li>**16 Grubs:** Rancid Egg</li>
+            <li>**23 Grubs:** Hallownest Seal</li>
+            <li>**31 Grubs:** Pale Ore</li>
+            <li>**38 Grubs:** King's Idol</li>
+            <li>**46 Grubs:** Grubberfly's Elegy Charm</li>
+        </ul>
+    </div>
+    <script>
+        // --- CONFIGURATION ---
+        // Your Render URL for the live API
+        const API_BASE_URL = 'https://grub-tracker-api.onrender.com/api'; 
+        // ---------------------
 
-        <h2>Grub Rewards (from Grubfather)</h2>
-        <ul class="reward-list">
-            <li>**5 Grubs:** Mask Shard</li>
-            <li>**10 Grubs:** Grubsong Charm</li>
-            <li>**16 Grubs:** Rancid Egg</li>
-            <li>**23 Grubs:** Hallownest Seal</li>
-            <li>**31 Grubs:** Pale Ore</li>
-            <li>**38 Grubs:** King's Idol</li>
-            <li>**46 Grubs:** Grubberfly's Elegy Charm</li>
-        </ul>
-    </div>
-    <script>
-        // --- CONFIGURATION ---
-        // Your Render URL for the live API
-        const API_BASE_URL = 'https://grub-tracker-api.onrender.com/api'; 
-        // ---------------------
-
-        // 🔑 ADDED: Element references for new UI components
-        const authContainer = document.getElementById('auth-container');
-        const checklistContainer = document.getElementById('checklist-container');
-        const messageArea = document.getElementById('message-area');
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
-        const logoutButton = document.getElementById('logout-button');
-        const showSignupLink = document.getElementById('show-signup-link');
-        const showLoginLink = document.getElementById('show-login-link');
-        // 💡 ADDED: Reference for the counter element
-        const grubCounter = document.getElementById('grub-counter'); 
-        // --- End New Element References ---
+        // 🔑 ADDED: Element references for new UI components
+        const authContainer = document.getElementById('auth-container');
+        const checklistContainer = document.getElementById('checklist-container');
+        const messageArea = document.getElementById('message-area');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const logoutButton = document.getElementById('logout-button');
+        const showSignupLink = document.getElementById('show-signup-link');
+        const showLoginLink = document.getElementById('show-login-link');
+        // 💡 ADDED: Reference for the counter element
+        const grubCounter = document.getElementById('grub-counter'); 
+        // --- End New Element References ---
 
 
-        const grubsData = [
-            // ... (Grub data is unchanged) ...
-            { area: "Forgotten Crossroads (5 Grubs)", list: [
-                "Grub 1: Defeat the Husk Guard.", "Grub 2: Found in the main cavern, relatively easy to reach.", "Grub 3: Found behind a breakable wall.", "Grub 4: Requires a Nail-bounce to reach.", "Grub 5: Requires the Mothwing Cloak (Dash) or a Nail-bounce."
-            ]},
-            // ... (All other grub data entries) ...
-            { area: "Greenpath (4 Grubs)", list: ["Grub 6: Requires throwing a moss block off a ledge.", "Grub 7: Found in a straightforward platforming section.", "Grub 8: Defeat the Moss Knight.", "Grub 9: Found in a challenging platforming area."]},
-            { area: "Fungal Wastes (2 Grubs)", list: ["Grub 10: Requires the Mothwing Cloak (Dash).", "Grub 11: Requires the Mantis Claw (Wall Jump)."]},
-            { area: "City of Tears (5 Grubs)", list: ["Grub 12: Found in a hidden area accessible without special movement abilities.", "Grub 13: Defeat the Great Husk Sentry.", "Grub 14: Requires Desolate Dive / Descending Dark to break a floor.", "Grub 15: Found in a straightforward section of the city.", "Grub 16: Requires Mantis Claw and Monarch Wings (Double Jump), or a difficult Nail-bounce."]},
-            { area: "Crystal Peak (7 Grubs)", list: ["Grub 17: Requires Mantis Claw and Crystal Heart (Super Dash).", "Grub 18: Requires Mothwing Cloak and Mantis Claw.", "Grub 19: Requires Mantis Claw and either Crystal Heart or Monarch Wings.", "Grub 20: Requires Mothwing Cloak and Monarch Wings, or a Nail-bounce.", "Grub 21: Requires Mothwing Cloak and Mantis Claw.", "Grub 22: Requires Mothwing Cloak.", "Grub 23: Requires Mothwing Cloak, Mantis Claw, and Desolate Dive / Descending Dark."]},
-            { area: "Resting Grounds (1 Grub)", list: ["Grub 24: Requires Desolate Dive / Descending Dark to break a floor."]},
-            { area: "Royal Waterways (3 Grubs)", list: ["Grub 25: Found in an accessible area near the main path.", "Grub 26: Requires Crystal Heart and Monarch Wings, or a difficult Nail-bounce.", "Grub 27: Requires Isma's Tear to swim across acid."]},
-            { area: "Howling Cliffs (1 Grub)", list: ["Grub 28: Requires Mantis Claw."]},
-            { area: "Kingdom's Edge (2 Grubs)", list: ["Grub 29: Requires Desolate Dive / Descending Dark to break a floor.", "Grub 30: Requires Mantis Claw."]},
-            { area: "Fog Canyon (1 Grub)", list: ["Grub 31: Requires Crystal Heart."]},
-            { area: "Queen's Gardens (3 Grubs)", list: ["Grub 32: Found near the main routes.", "Grub 33: Requires Mantis Claw, Crystal Heart, and Monarch Wings, or a difficult Nail-bounce.", "Grub 34: Requires Mantis Claw."]},
-            { area: "Deepnest (5 Grubs)", list: ["Grub 35: Requires Mantis Claw and breaking a breakable wall.", "Grub 36: Requires Mantis Claw and Crystal Heart, or a difficult Nail-bounce.", "Grub 37: Requires breaking a breakable wall and either Monarch Wings or Crystal Heart.", "Grub 38: Requires Mothwing Cloak and Mantis Claw.", "Grub 39: Requires Mothwing Cloak and Mantis Claw."]},
-            { area: "Ancient Basin (2 Grubs)", list: ["Grub 40: Requires Mothwing Cloak and Monarch Wings.", "Grub 41: Requires Desolate Dive / Descending Dark to break a floor."]},
-            { area: "The Hive (2 Grubs)", list: ["Grub 42: Requires Desolate Dive / Descending Dark and Isma's Tear.", "Grub 43: Requires Crystal Heart and Monarch Wings, or a difficult Nail-bounce."]},
-            { area: "Tower of Love (3 Grubs)", list: ["Grub 44: Found in the room after defeating The Collector. Requires the Love Key.", "Grub 45: Found in the room after defeating The Collector. Requires the Love Key.", "Grub 46: Found in the room after defeating The Collector. Requires the Love Key."]}
-        ];
-        // ... (End Grub Data) ...
+        const grubsData = [
+            // ... (Grub data is unchanged) ...
+            { area: "Forgotten Crossroads (5 Grubs)", list: [
+                "Grub 1: Defeat the Husk Guard.", "Grub 2: Found in the main cavern, relatively easy to reach.", "Grub 3: Found behind a breakable wall.", "Grub 4: Requires a Nail-bounce to reach.", "Grub 5: Requires the Mothwing Cloak (Dash) or a Nail-bounce."
+            ]},
+            // ... (All other grub data entries) ...
+            { area: "Greenpath (4 Grubs)", list: ["Grub 6: Requires throwing a moss block off a ledge.", "Grub 7: Found in a straightforward platforming section.", "Grub 8: Defeat the Moss Knight.", "Grub 9: Found in a challenging platforming area."]},
+            { area: "Fungal Wastes (2 Grubs)", list: ["Grub 10: Requires the Mothwing Cloak (Dash).", "Grub 11: Requires the Mantis Claw (Wall Jump)."]},
+            { area: "City of Tears (5 Grubs)", list: ["Grub 12: Found in a hidden area accessible without special movement abilities.", "Grub 13: Defeat the Great Husk Sentry.", "Grub 14: Requires Desolate Dive / Descending Dark to break a floor.", "Grub 15: Found in a straightforward section of the city.", "Grub 16: Requires Mantis Claw and Monarch Wings (Double Jump), or a difficult Nail-bounce."]},
+            { area: "Crystal Peak (7 Grubs)", list: ["Grub 17: Requires Mantis Claw and Crystal Heart (Super Dash).", "Grub 18: Requires Mothwing Cloak and Mantis Claw.", "Grub 19: Requires Mantis Claw and either Crystal Heart or Monarch Wings.", "Grub 20: Requires Mothwing Cloak and Monarch Wings, or a Nail-bounce.", "Grub 21: Requires Mothwing Cloak and Mantis Claw.", "Grub 22: Requires Mothwing Cloak.", "Grub 23: Requires Mothwing Cloak, Mantis Claw, and Desolate Dive / Descending Dark."]},
+            { area: "Resting Grounds (1 Grub)", list: ["Grub 24: Requires Desolate Dive / Descending Dark to break a floor."]},
+            { area: "Royal Waterways (3 Grubs)", list: ["Grub 25: Found in an accessible area near the main path.", "Grub 26: Requires Crystal Heart and Monarch Wings, or a difficult Nail-bounce.", "Grub 27: Requires Isma's Tear to swim across acid."]},
+            { area: "Howling Cliffs (1 Grub)", list: ["Grub 28: Requires Mantis Claw."]},
+            { area: "Kingdom's Edge (2 Grubs)", list: ["Grub 29: Requires Desolate Dive / Descending Dark to break a floor.", "Grub 30: Requires Mantis Claw."]},
+            { area: "Fog Canyon (1 Grub)", list: ["Grub 31: Requires Crystal Heart."]},
+            { area: "Queen's Gardens (3 Grubs)", list: ["Grub 32: Found near the main routes.", "Grub 33: Requires Mantis Claw, Crystal Heart, and Monarch Wings, or a difficult Nail-bounce.", "Grub 34: Requires Mantis Claw."]},
+            { area: "Deepnest (5 Grubs)", list: ["Grub 35: Requires Mantis Claw and breaking a breakable wall.", "Grub 36: Requires Mantis Claw and Crystal Heart, or a difficult Nail-bounce.", "Grub 37: Requires breaking a breakable wall and either Monarch Wings or Crystal Heart.", "Grub 38: Requires Mothwing Cloak and Mantis Claw.", "Grub 39: Requires Mothwing Cloak and Mantis Claw."]},
+            { area: "Ancient Basin (2 Grubs)", list: ["Grub 40: Requires Mothwing Cloak and Monarch Wings.", "Grub 41: Requires Desolate Dive / Descending Dark to break a floor."]},
+            { area: "The Hive (2 Grubs)", list: ["Grub 42: Requires Desolate Dive / Descending Dark and Isma's Tear.", "Grub 43: Requires Crystal Heart and Monarch Wings, or a difficult Nail-bounce."]},
+            { area: "Tower of Love (3 Grubs)", list: ["Grub 44: Found in the room after defeating The Collector. Requires the Love Key.", "Grub 45: Found in the room after defeating The Collector. Requires the Love Key.", "Grub 46: Found in the room after defeating The Collector. Requires the Love Key."]}
+        ];
+        // ... (End Grub Data) ...
 
-        const container = document.getElementById('grub-list-container');
-        let grubIndex = 0; 
-        
-        // 💡 NEW FUNCTION: Calculates and updates the rescued grub count (No Change)
-        function updateGrubCounter() {
-            // Selects all checked checkboxes whose IDs start with 'grub-'
-            const rescuedGrubs = document.querySelectorAll('input[id^="grub-"]:checked');
-            const rescuedCount = rescuedGrubs.length;
-            const totalGrubs = 46; // Total number of grubs in Hollow Knight
+        const container = document.getElementById('grub-list-container');
+        let grubIndex = 0; 
+        
+        // 💡 NEW FUNCTION: Calculates and updates the rescued grub count
+        function updateGrubCounter() {
+            // Selects all checked checkboxes whose IDs start with 'grub-'
+            const rescuedGrubs = document.querySelectorAll('input[id^="grub-"]:checked');
+            const rescuedCount = rescuedGrubs.length;
+            const totalGrubs = 46; // Total number of grubs in Hollow Knight
 
-            // Update the HTML element
-            if (grubCounter) {
-                grubCounter.textContent = `Grubs Rescued: ${rescuedCount} / ${totalGrubs}`;
-            }
-        }
+            // Update the HTML element
+            if (grubCounter) {
+                grubCounter.textContent = `Grubs Rescued: ${rescuedCount} / ${totalGrubs}`;
+            }
+        }
 
 
-        // 🔑 ADDED: HELPER - Gets the JWT token from localStorage and formats the Authorization header (No Change)
-        function getAuthHeaders(contentType = 'application/json') {
-            const token = localStorage.getItem('jwtToken');
-            const headers = {
-                'Content-Type': contentType,
-            };
-            if (token) {
-                // Critical: Format required by server's authMiddleware
-                headers['Authorization'] = `Bearer ${token}`;
-            }
-            return headers;
-        }
+        // 🔑 ADDED: HELPER - Gets the JWT token from localStorage and formats the Authorization header
+        function getAuthHeaders(contentType = 'application/json') {
+            const token = localStorage.getItem('jwtToken');
+            const headers = {
+                'Content-Type': contentType,
+            };
+            if (token) {
+                // Critical: Format required by server's authMiddleware
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+            return headers;
+        }
 
-        // 🔑 ADDED: HANDLER - Logout function to clear token and show login (No Change)
-        function handleLogout() {
-            localStorage.removeItem('jwtToken');
-            checkAuthAndRenderUI();
-            messageArea.textContent = 'You have been logged out.';
-        }
+        // 🔑 ADDED: HANDLER - Logout function to clear token and show login
+        function handleLogout() {
+            localStorage.removeItem('jwtToken');
+            checkAuthAndRenderUI();
+            messageArea.textContent = 'You have been logged out.';
+        }
 
-        // 🔑 ADDED: HANDLER - Toggles between login and signup forms (No Change)
-        function toggleAuthForms(showLogin) {
-            loginForm.style.display = showLogin ? 'block' : 'none';
-            signupForm.style.display = showLogin ? 'none' : 'block';
-            messageArea.textContent = ''; 
-        }
+        // 🔑 ADDED: HANDLER - Toggles between login and signup forms
+        function toggleAuthForms(showLogin) {
+            loginForm.style.display = showLogin ? 'block' : 'none';
+            signupForm.style.display = showLogin ? 'none' : 'block';
+            messageArea.textContent = ''; 
+        }
 
-        // 🔑 ADDED: CORE LOGIC - Checks for token and shows/hides UI (No Change)
-        function checkAuthAndRenderUI() {
-            if (localStorage.getItem('jwtToken')) {
-                authContainer.style.display = 'none';
-                checklistContainer.style.display = 'block';
-                initChecklist(); // Proceed to load data for the logged-in user
-            } else {
-                authContainer.style.display = 'block';
-                checklistContainer.style.display = 'none';
-                container.innerHTML = ''; // Clear checklist content if logged out
-                toggleAuthForms(true); // Default to showing login form
-            }
-        }
+        // 🔑 ADDED: CORE LOGIC - Checks for token and shows/hides UI
+        function checkAuthAndRenderUI() {
+            if (localStorage.getItem('jwtToken')) {
+                authContainer.style.display = 'none';
+                checklistContainer.style.display = 'block';
+                initChecklist(); // Proceed to load data for the logged-in user
+            } else {
+                authContainer.style.display = 'block';
+                checklistContainer.style.display = 'none';
+                container.innerHTML = ''; // Clear checklist content if logged out
+                toggleAuthForms(true); // Default to showing login form
+            }
+        }
 
-        // 🔑 MODIFIED: HANDLER - Handles both login and signup form submissions with UX validation
-        async function handleAuth(event, endpoint) {
-            event.preventDefault();
-            
-            const form = event.target;
-            const username = form.elements[0].value; 
-            const password = form.elements[1].value;
+        // 🔑 MODIFIED: HANDLER - Handles both login and signup form submissions with UX validation
+        async function handleAuth(event, endpoint) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const username = form.elements[0].value; 
+            const password = form.elements[1].value;
 
-            messageArea.textContent = ''; // Clear old messages
+            messageArea.textContent = ''; // Clear old messages
 
-            // --- NEW VALIDATION LOGIC FOR SIGNUP ---
-            if (endpoint === 'signup') {
-                // Read the third input field (Confirm Password)
-                const confirmPassword = form.elements[2].value; 
-                
-                // 1. Password Length Check (Using the CURRENT 6-character minimum)
-                if (password.length < 6) { 
-                    messageArea.textContent = 'Error: Password must be at least 6 characters long.';
-                    return; // Stop execution, do not send the request to the server
-                }
+            // ✅ CLIENT-SIDE PASSWORD LENGTH VALIDATION (UX Improvement)
+            if (endpoint === 'signup' && password.length < 6) {
+                messageArea.textContent = 'Error: Password must be at least 6 characters long.';
+                // Stop execution, do not send the request to the server
+                return; 
+            }
+            // ------------------------------------------
 
-                // 2. Password Comparison Check
-                if (password !== confirmPassword) {
-                    messageArea.textContent = 'Error: Passwords do not match.';
-                    return; // Stop execution, do not send the request to the server
-                }
-            }
-            // ------------------------------------------
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/${endpoint}`, {
+                    method: 'POST',
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify({ username, password })
+                });
 
-            try {
-                const response = await fetch(`${API_BASE_URL}/auth/${endpoint}`, {
-                    method: 'POST',
-                    headers: getAuthHeaders(),
-                    // NOTE: Only the password field is sent to the server
-                    body: JSON.stringify({ username, password })
-                });
+                const data = await response.json();
 
-                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('jwtToken', data.token); // Store the JWT!
+                    form.reset(); 
+                    checkAuthAndRenderUI(); // Show the checklist
+                } else {
+                    // Catches server errors like "Username already taken" or "Invalid credentials"
+                    messageArea.textContent = `Error: ${data.message}`;
+                }
+            } catch (error) {
+                messageArea.textContent = 'Network error. Could not connect to the server.';
+            }
+        }
 
-                if (response.ok) {
-                    localStorage.setItem('jwtToken', data.token); // Store the JWT!
-                    form.reset(); 
-                    checkAuthAndRenderUI(); // Show the checklist
-                } else {
-                    // Catches server errors like "Username already taken" or "Invalid credentials"
-                    messageArea.textContent = `Error: ${data.message}`;
-                }
-            } catch (error) {
-                messageArea.textContent = 'Network error. Could not connect to the server.';
-            }
-        }
+        // --- Step A: Function to update the server (POST) ---
+        // 🔄 MODIFIED: Now uses the secure getAuthHeaders() and the new API route
+        async function updateServer(grubId, isChecked) {
+            try {
+                // Route changed from /api/update to /api/checklist
+                const response = await fetch(`${API_BASE_URL}/checklist`, { 
+                    method: 'POST',
+                    headers: getAuthHeaders(), // 👈 ADDED: Secure headers
+                    body: JSON.stringify({ grubId, isChecked })
+                });
 
-        // --- Step A: Function to update the server (POST) ---
-        // 🔄 MODIFIED: Now uses the secure getAuthHeaders() and the new API route (No Change)
-        async function updateServer(grubId, isChecked) {
-            try {
-                // Route changed from /api/update to /api/checklist
-                const response = await fetch(`${API_BASE_URL}/checklist`, { 
-                    method: 'POST',
-                    headers: getAuthHeaders(), // 👈 ADDED: Secure headers
-                    body: JSON.stringify({ grubId, isChecked })
-                });
+                if (response.status === 401) {
+                    handleLogout(); 
+                    return;
+                }
 
-                if (response.status === 401) {
-                    handleLogout(); 
-                    return;
-                }
+                if (!response.ok) {
+                    throw new Error(`Update failed: ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error('Error communicating with server.', error);
+            }
+        }
 
-                if (!response.ok) {
-                    throw new Error(`Update failed: ${response.statusText}`);
-                }
-            } catch (error) {
-                console.error('Error communicating with server.', error);
-            }
-        }
+        // --- Step B: Function to build and render the checklist ---
+        function renderChecklist(checkedGrubsFromServer) {
+            // Clear container before rendering new user's list
+            container.innerHTML = ''; 
+            grubIndex = 0; 
+            
+            grubsData.forEach(areaData => {
+                const areaDiv = document.createElement('div');
+                areaDiv.className = 'grub-area';
+                areaDiv.innerHTML = `<h3>${areaData.area}</h3>`;
+                
+                const ul = document.createElement('ul');
+                
+                areaData.list.forEach(grubDescription => {
+                    grubIndex++;
+                    const uniqueId = `grub-${grubIndex}`;
+                    
+                    const li = document.createElement('li');
+                    li.id = `li-${uniqueId}`;
 
-        // --- Step B: Function to build and render the checklist (No Change) ---
-        function renderChecklist(checkedGrubsFromServer) {
-            // Clear container before rendering new user's list
-            container.innerHTML = ''; 
-            grubIndex = 0; 
-            
-            grubsData.forEach(areaData => {
-                const areaDiv = document.createElement('div');
-                areaDiv.className = 'grub-area';
-                areaDiv.innerHTML = `<h3>${areaData.area}</h3>`;
-                
-                const ul = document.createElement('ul');
-                
-                areaData.list.forEach(grubDescription => {
-                    grubIndex++;
-                    const uniqueId = `grub-${grubIndex}`;
-                    
-                    const li = document.createElement('li');
-                    li.id = `li-${uniqueId}`;
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = uniqueId;
+                    
+                    const isGrubChecked = checkedGrubsFromServer[uniqueId] === true;
+                    if (isGrubChecked) {
+                        checkbox.checked = true;
+                        li.classList.add('checked-item');
+                    }
 
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.id = uniqueId;
-                    
-                    const isGrubChecked = checkedGrubsFromServer[uniqueId] === true;
-                    if (isGrubChecked) {
-                        checkbox.checked = true;
-                        li.classList.add('checked-item');
-                    }
+                    checkbox.addEventListener('change', (event) => {
+                        const isChecked = event.target.checked;
+                        li.classList.toggle('checked-item', isChecked);
+                        updateServer(uniqueId, isChecked);
+                        
+                        // 💡 ADDED: Update counter on every change
+                        updateGrubCounter(); 
+                    });
 
-                    checkbox.addEventListener('change', (event) => {
-                        const isChecked = event.target.checked;
-                        li.classList.toggle('checked-item', isChecked);
-                        updateServer(uniqueId, isChecked);
-                        
-                        // 💡 ADDED: Update counter on every change
-                        updateGrubCounter(); 
-                    });
+                    const label = document.createElement('label');
+                    label.htmlFor = uniqueId;
+                    label.className = 'grub-item-text';
+                    label.textContent = grubDescription;
 
-                    const label = document.createElement('label');
-                    label.htmlFor = uniqueId;
-                    label.className = 'grub-item-text';
-                    label.textContent = grubDescription;
+                    li.appendChild(checkbox);
+                    li.appendChild(label);
+                    ul.appendChild(li);
+                });
 
-                    li.appendChild(checkbox);
-                    li.appendChild(label);
-                    ul.appendChild(li);
-                });
+                areaDiv.appendChild(ul);
+                container.appendChild(areaDiv);
+            });
+            
+            // 💡 ADDED: Initial counter update after the checklist is built
+            updateGrubCounter(); 
+        }
 
-                areaDiv.appendChild(ul);
-                container.appendChild(areaDiv);
-            });
-            
-            // 💡 ADDED: Initial counter update after the checklist is built
-            updateGrubCounter(); 
-        }
+        // --- Step C: Main function to fetch data and start rendering ---
+        // 🔄 MODIFIED: Now uses the secure getAuthHeaders() and handles 401 Unauthorized errors
+        async function initChecklist() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/checklist`, {
+                    headers: getAuthHeaders() // 👈 ADDED: Secure headers
+                });
+                
+                if (response.status === 401) {
+                    // Token is invalid/expired, force user back to login
+                    handleLogout(); 
+                    return;
+                }
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const checkedGrubsFromServer = await response.json();
+                renderChecklist(checkedGrubsFromServer);
 
-        // --- Step C: Main function to fetch data and start rendering (No Change) ---
-        // 🔄 MODIFIED: Now uses the secure getAuthHeaders() and handles 401 Unauthorized errors
-        async function initChecklist() {
-            try {
-                const response = await fetch(`${API_BASE_URL}/checklist`, {
-                    headers: getAuthHeaders() // 👈 ADDED: Secure headers
-                });
-                
-                if (response.status === 401) {
-                    // Token is invalid/expired, force user back to login
-                    handleLogout(); 
-                    return;
-                }
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const checkedGrubsFromServer = await response.json();
-                renderChecklist(checkedGrubsFromServer);
+            } catch (error) {
+                console.error('Initialization Error:', error);
+                // 🔄 MODIFIED: Adjusted error message for multi-user context
+                container.innerHTML = '<h2><span style="color: red;">[DATA ERROR]</span> Could not load checklist. Please check console for network details.</h2>';
+            }
+        }
 
-            } catch (error) {
-                console.error('Initialization Error:', error);
-                // 🔄 MODIFIED: Adjusted error message for multi-user context
-                container.innerHTML = '<h2><span style="color: red;">[DATA ERROR]</span> Could not load checklist. Please check console for network details.</h2>';
-            }
-        }
+        // 🔑 ADDED: EVENT LISTENERS and Initial Call
 
-        // 🔑 ADDED: EVENT LISTENERS and Initial Call (No Change)
+        // Form submission listeners for login/signup
+        loginForm.addEventListener('submit', (e) => handleAuth(e, 'login'));
+        signupForm.addEventListener('submit', (e) => handleAuth(e, 'signup'));
+        
+        // Link listeners to toggle between forms
+        showSignupLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleAuthForms(false); // Show signup
+        });
+        showLoginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleAuthForms(true); // Show login
+        });
+        
+        // Logout button listener
+        logoutButton.addEventListener('click', handleLogout);
 
-        // Form submission listeners for login/signup
-        loginForm.addEventListener('submit', (e) => handleAuth(e, 'login'));
-        signupForm.addEventListener('submit', (e) => handleAuth(e, 'signup'));
-        
-        // Link listeners to toggle between forms
-        showSignupLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            toggleAuthForms(false); // Show signup
-        });
-        showLoginLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            toggleAuthForms(true); // Show login
-        });
-        
-        // Logout button listener
-        logoutButton.addEventListener('click', handleLogout);
+        // Run the authentication check when the page loads
+        checkAuthAndRenderUI();
 
-        // Run the authentication check when the page loads
-        checkAuthAndRenderUI();
-
-    </script>
+    </script>
 
 </body>
 </html>
