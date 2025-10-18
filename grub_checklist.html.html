@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hollow Knight Grub Checklist</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #333;
+            color: #eee;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #ddd;
+            border-bottom: 2px solid #555;
+            padding-bottom: 5px;
+        }
+        .grub-area {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .grub-item-text {
+            flex-grow: 1;
+        }
+        .checked-item .grub-item-text {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .reward-list {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hollow Knight Grub Checklist (46 Total)</h1>
+
+    <div id="grub-list-container">
+        </div>
+
+    <h2>Grub Rewards (from Grubfather)</h2>
+    <ul class="reward-list">
+        <li>**5 Grubs:** Mask Shard</li>
+        <li>**10 Grubs:** Grubsong Charm</li>
+        <li>**16 Grubs:** Rancid Egg</li>
+        <li>**23 Grubs:** Hallownest Seal</li>
+        <li>**31 Grubs:** Pale Ore</li>
+        <li>**38 Grubs:** King's Idol</li>
+        <li>**46 Grubs:** Grubberfly's Elegy Charm</li>
+    </ul>
+
+    <script>
+        // --- CONFIGURATION ---
+        // This MUST match the port your Node.js server is running on
+        const API_BASE_URL = 'http://192.168.1.66:3000/api'; 
+        // ---------------------
+
+        const grubsData = [
+            { area: "Forgotten Crossroads (5 Grubs)", list: [
+                "Grub 1: Defeat the Husk Guard.",
+                "Grub 2: Found in the main cavern, relatively easy to reach.",
+                "Grub 3: Found behind a breakable wall.",
+                "Grub 4: Requires a Nail-bounce to reach.",
+                "Grub 5: Requires the Mothwing Cloak (Dash) or a Nail-bounce."
+            ]},
+            { area: "Greenpath (4 Grubs)", list: [
+                "Grub 6: Requires throwing a moss block off a ledge.",
+                "Grub 7: Found in a straightforward platforming section.",
+                "Grub 8: Defeat the Moss Knight.",
+                "Grub 9: Found in a challenging platforming area."
+            ]},
+            { area: "Fungal Wastes (2 Grubs)", list: [
+                "Grub 10: Requires the Mothwing Cloak (Dash).",
+                "Grub 11: Requires the Mantis Claw (Wall Jump)."
+            ]},
+            { area: "City of Tears (5 Grubs)", list: [
+                "Grub 12: Found in a hidden area accessible without special movement abilities.",
+                "Grub 13: Defeat the Great Husk Sentry.",
+                "Grub 14: Requires Desolate Dive / Descending Dark to break a floor.",
+                "Grub 15: Found in a straightforward section of the city.",
+                "Grub 16: Requires Mantis Claw and Monarch Wings (Double Jump), or a difficult Nail-bounce."
+            ]},
+            { area: "Crystal Peak (7 Grubs)", list: [
+                "Grub 17: Requires Mantis Claw and Crystal Heart (Super Dash).",
+                "Grub 18: Requires Mothwing Cloak and Mantis Claw.",
+                "Grub 19: Requires Mantis Claw and either Crystal Heart or Monarch Wings.",
+                "Grub 20: Requires Mothwing Cloak and Monarch Wings, or a Nail-bounce.",
+                "Grub 21: Requires Mothwing Cloak and Mantis Claw.",
+                "Grub 22: Requires Mothwing Cloak.",
+                "Grub 23: Requires Mothwing Cloak, Mantis Claw, and Desolate Dive / Descending Dark."
+            ]},
+            { area: "Resting Grounds (1 Grub)", list: [
+                "Grub 24: Requires Desolate Dive / Descending Dark to break a floor."
+            ]},
+            { area: "Royal Waterways (3 Grubs)", list: [
+                "Grub 25: Found in an accessible area near the main path.",
+                "Grub 26: Requires Crystal Heart and Monarch Wings, or a difficult Nail-bounce.",
+                "Grub 27: Requires Isma's Tear to swim across acid."
+            ]},
+            { area: "Howling Cliffs (1 Grub)", list: [
+                "Grub 28: Requires Mantis Claw."
+            ]},
+            { area: "Kingdom's Edge (2 Grubs)", list: [
+                "Grub 29: Requires Desolate Dive / Descending Dark to break a floor.",
+                "Grub 30: Requires Mantis Claw."
+            ]},
+            { area: "Fog Canyon (1 Grub)", list: [
+                "Grub 31: Requires Crystal Heart."
+            ]},
+            { area: "Queen's Gardens (3 Grubs)", list: [
+                "Grub 32: Found near the main routes.",
+                "Grub 33: Requires Mantis Claw, Crystal Heart, and Monarch Wings, or a difficult Nail-bounce.",
+                "Grub 34: Requires Mantis Claw."
+            ]},
+            { area: "Deepnest (5 Grubs)", list: [
+                "Grub 35: Requires Mantis Claw and breaking a breakable wall.",
+                "Grub 36: Requires Mantis Claw and Crystal Heart, or a difficult Nail-bounce.",
+                "Grub 37: Requires breaking a breakable wall and either Monarch Wings or Crystal Heart.",
+                "Grub 38: Requires Mothwing Cloak and Mantis Claw.",
+                "Grub 39: Requires Mothwing Cloak and Mantis Claw."
+            ]},
+            { area: "Ancient Basin (2 Grubs)", list: [
+                "Grub 40: Requires Mothwing Cloak and Monarch Wings.",
+                "Grub 41: Requires Desolate Dive / Descending Dark to break a floor."
+            ]},
+            { area: "The Hive (2 Grubs)", list: [
+                "Grub 42: Requires Desolate Dive / Descending Dark and Isma's Tear.",
+                "Grub 43: Requires Crystal Heart and Monarch Wings, or a difficult Nail-bounce."
+            ]},
+            { area: "Tower of Love (3 Grubs)", list: [
+                "Grub 44: Found in the room after defeating The Collector. Requires the Love Key.",
+                "Grub 45: Found in the room after defeating The Collector. Requires the Love Key.",
+                "Grub 46: Found in the room after defeating The Collector. Requires the Love Key."
+            ]}
+        ];
+
+        const container = document.getElementById('grub-list-container');
+        let grubIndex = 0; // Global index to track the unique ID for each grub (grub-1 to grub-46)
+
+        // --- Step A: Function to update the server (POST) ---
+        async function updateServer(grubId, isChecked) {
+            try {
+                await fetch(`${API_BASE_URL}/update`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ grubId, isChecked })
+                });
+            } catch (error) {
+                console.error('Error communicating with server. Check console for details.', error);
+            }
+        }
+
+        // --- Step B: Function to build and render the checklist ---
+        function renderChecklist(checkedGrubsFromServer) {
+            // Reset index before rendering
+            grubIndex = 0; 
+            
+            grubsData.forEach(areaData => {
+                const areaDiv = document.createElement('div');
+                areaDiv.className = 'grub-area';
+                areaDiv.innerHTML = `<h3>${areaData.area}</h3>`;
+                
+                const ul = document.createElement('ul');
+                
+                areaData.list.forEach(grubDescription => {
+                    grubIndex++;
+                    const uniqueId = `grub-${grubIndex}`;
+                    
+                    const li = document.createElement('li');
+                    li.id = `li-${uniqueId}`;
+
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = uniqueId;
+                    
+                    // --- Load state from the server data ---
+                    const isGrubChecked = checkedGrubsFromServer[uniqueId] === true;
+                    if (isGrubChecked) {
+                        checkbox.checked = true;
+                        li.classList.add('checked-item');
+                    }
+
+                    // --- Add event listener to update server ---
+                    checkbox.addEventListener('change', (event) => {
+                        const isChecked = event.target.checked;
+                        li.classList.toggle('checked-item', isChecked);
+                        
+                        // Use the function to update the cloud database
+                        updateServer(uniqueId, isChecked); 
+                    });
+
+                    const label = document.createElement('label');
+                    label.htmlFor = uniqueId;
+                    label.className = 'grub-item-text';
+                    label.textContent = grubDescription;
+
+                    li.appendChild(checkbox);
+                    li.appendChild(label);
+                    ul.appendChild(li);
+                });
+
+                areaDiv.appendChild(ul);
+                container.appendChild(areaDiv);
+            });
+        }
+
+        // --- Step C: Main function to fetch data and start rendering ---
+        async function initChecklist() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/checklist`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const checkedGrubsFromServer = await response.json();
+                renderChecklist(checkedGrubsFromServer);
+
+            } catch (error) {
+                console.error('Initialization Error:', error);
+                container.innerHTML = '<h2><span style="color: red;">[SERVER ERROR]</span> Could not load checklist. Please ensure the Node.js server is running on port 3000.</h2>';
+            }
+        }
+
+        initChecklist();
+
+    </script>
+
+</body>
+</html>
