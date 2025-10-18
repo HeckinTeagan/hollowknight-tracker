@@ -12,7 +12,7 @@
             padding: 20px;
             border: 1px solid #777;
             border-radius: 8px;
-            background-color: #444;
+            background-color: rgba(0, 0, 0, 0.85); /* Added dark opacity for readability */
             text-align: center;
         }
         #auth-container input {
@@ -50,7 +50,14 @@
         /* --- EXISTING STYLES --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #333;
+            
+            /* 🖼️ NEW BACKGROUND IMAGE STYLES */
+            background-image: url('https://static.wikia.nocookie.net/hollowknight/images/f/f2/Screenshot_HK_Grubs_01.png');
+            background-color: #333; /* Fallback color */
+            background-size: cover; /* Ensures the image covers the entire screen */
+            background-position: center;
+            background-attachment: fixed; /* Keeps the image still when scrolling */
+            
             color: #eee;
             margin: 20px;
         }
@@ -65,6 +72,7 @@
             padding: 10px;
             border: 1px solid #555;
             border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.7); /* Added dark opacity for readability */
         }
         ul {
             list-style-type: none;
@@ -237,7 +245,7 @@
 
             messageArea.textContent = ''; // Clear old messages
 
-            // ✅ ADDED: CLIENT-SIDE PASSWORD LENGTH VALIDATION (UX Improvement)
+            // ✅ CLIENT-SIDE PASSWORD LENGTH VALIDATION (UX Improvement)
             if (endpoint === 'signup' && password.length < 6) {
                 messageArea.textContent = 'Error: Password must be at least 6 characters long.';
                 // Stop execution, do not send the request to the server
