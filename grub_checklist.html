@@ -136,6 +136,9 @@
         
         <h1>Hollow Knight Grub Checklist (46 Total)</h1>
 
+        <div id="grub-counter" style="margin-bottom: 20px; font-size: 1.2em; color: #5cb85c;">
+            Grubs Rescued: 0 / 46
+        </div>
         <div id="grub-list-container">
         </div>
 
@@ -165,6 +168,8 @@
         const logoutButton = document.getElementById('logout-button');
         const showSignupLink = document.getElementById('show-signup-link');
         const showLoginLink = document.getElementById('show-login-link');
+        // 💡 ADDED: Reference for the counter element
+        const grubCounter = document.getElementById('grub-counter'); 
         // --- End New Element References ---
 
 
@@ -193,6 +198,20 @@
 
         const container = document.getElementById('grub-list-container');
         let grubIndex = 0; 
+        
+        // 💡 NEW FUNCTION: Calculates and updates the rescued grub count
+        function updateGrubCounter() {
+            // Selects all checked checkboxes whose IDs start with 'grub-'
+            const rescuedGrubs = document.querySelectorAll('input[id^="grub-"]:checked');
+            const rescuedCount = rescuedGrubs.length;
+            const totalGrubs = 46; // Total number of grubs in Hollow Knight
+
+            // Update the HTML element
+            if (grubCounter) {
+                grubCounter.textContent = `Grubs Rescued: ${rescuedCount} / ${totalGrubs}`;
+            }
+        }
+
 
         // 🔑 ADDED: HELPER - Gets the JWT token from localStorage and formats the Authorization header
         function getAuthHeaders(contentType = 'application/json') {
@@ -299,7 +318,7 @@
             }
         }
 
-        // --- Step B: Function to build and render the checklist (No major changes) ---
+        // --- Step B: Function to build and render the checklist ---
         function renderChecklist(checkedGrubsFromServer) {
             // Clear container before rendering new user's list
             container.innerHTML = ''; 
@@ -333,6 +352,9 @@
                         const isChecked = event.target.checked;
                         li.classList.toggle('checked-item', isChecked);
                         updateServer(uniqueId, isChecked);
+                        
+                        // 💡 ADDED: Update counter on every change
+                        updateGrubCounter(); 
                     });
 
                     const label = document.createElement('label');
@@ -348,6 +370,9 @@
                 areaDiv.appendChild(ul);
                 container.appendChild(areaDiv);
             });
+            
+            // 💡 ADDED: Initial counter update after the checklist is built
+            updateGrubCounter(); 
         }
 
         // --- Step C: Main function to fetch data and start rendering ---
