@@ -5,67 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hollow Knight Grub Checklist</title>
     <style>
-        /* --- ADDED AUTH STYLING --- */
-        #auth-container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #777;
-            border-radius: 8px;
-            background-color: rgba(0, 0, 0, 0.85);
-            text-align: center;
-        }
-        /* ✅ FIX: Ensure labels take up full width and stack */
-        #auth-container label {
-            display: block;
-            width: 90%; 
-            margin: 0 auto; /* Center the label text area */
-            text-align: left; /* Keep text aligned to the left */
-        }
-        /* ✅ MODIFIED: Inputs are now centered blocks */
-        #auth-container input {
-            width: 90%;
-            display: block; /* Ensure it is a block element */
-            margin: 8px auto; /* Center the input block horizontally */
-            padding: 10px;
-            border: 1px solid #555;
-            background-color: #333;
-            color: #eee;
-            border-radius: 4px;
-        }
-        #auth-container button {
-            width: 95%;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        #auth-container button:hover {
-            background-color: #4cae4c;
-        }
-        #logout-button {
-            float: right;
-            padding: 8px 15px;
-            margin-bottom: 20px;
-            background-color: #d9534f;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        /* --- EXISTING STYLES --- */
+        /* =======================================
+           1. GLOBAL & CORE CHECKLIST STYLES (RESTORED/COMPLETED)
+           ======================================= */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             
-            /* 🖼️ NEW BACKGROUND IMAGE STYLES */
+            /* 🖼️ BACKGROUND IMAGE STYLES - RESTORED */
             background-image: url('https://static.wikia.nocookie.net/hollowknight/images/f/f2/Screenshot_HK_Grubs_01.png');
             background-color: #333; /* Fallback color */
-            background-size: cover; /* Ensures the image covers the entire screen */
+            background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Keeps the image still when scrolling */
+            background-attachment: fixed;
             
             color: #eee;
             margin: 20px;
@@ -75,14 +26,27 @@
             border-bottom: 2px solid #555;
             padding-bottom: 5px;
         }
-        /* ... (rest of existing styles) ... */
+        
+        /* Checklist Container Styles - RESTORED */
+        #checklist-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #777;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.85);
+        }
+
+        /* Grub Area Styles - RESTORED */
         .grub-area {
             margin-bottom: 20px;
             padding: 10px;
             border: 1px solid #555;
             border-radius: 5px;
-            background-color: rgba(0, 0, 0, 0.7); /* Added dark opacity for readability */
+            background-color: rgba(0, 0, 0, 0.7); 
         }
+        
+        /* List and List Item Styles - RESTORED */
         ul {
             list-style-type: none;
             padding: 0;
@@ -109,6 +73,91 @@
             list-style-type: disc;
             margin-left: 20px;
         }
+        
+        /* FIX: Container to clear the float */
+        #top-controls {
+            overflow: auto; /* Clears the float created by the logout button */
+            margin-bottom: 20px;
+        }
+        
+        /* =======================================
+           2. AUTHENTICATION & NEW ELEMENT STYLES (FROM YOUR CODE)
+           ======================================= */
+        #auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #777;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.85);
+            text-align: center;
+        }
+        #auth-container label {
+            display: block;
+            width: 90%; 
+            margin: 0 auto; 
+            text-align: left; 
+        }
+        #auth-container input {
+            width: 90%;
+            display: block; 
+            margin: 8px auto; 
+            padding: 10px;
+            border: 1px solid #555;
+            background-color: #333;
+            color: #eee;
+            border-radius: 4px;
+        }
+        /* Generic Auth Button Style (for Login/Signup) - Modified with :not() for guest button */
+        #auth-container button:not(#guest-button) {
+            width: 95%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #auth-container button:not(#guest-button):hover {
+            background-color: #4cae4c;
+        }
+        
+        /* 🔑 NEW: Style for the guest button */
+        #guest-button {
+            /* Apply standard auth button styling */
+            width: 95%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+            /* Specific look for guest button */
+            margin-top: 15px; 
+            background-color: #555; 
+        }
+        #guest-button:hover {
+            background-color: #333;
+        }
+
+        #logout-button {
+            float: right;
+            padding: 8px 15px;
+            margin-bottom: 20px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        /* 🔑 NEW: Guest Status Label Style */
+        #guest-status {
+            color: #f0ad4e; /* Yellowish/Orange color */
+            font-style: italic;
+            display: inline-block; 
+            padding: 8px 15px;
+        }
     </style>
 </head>
 <body>
@@ -128,8 +177,10 @@
             <p>No account? <a href="#" id="show-signup-link">Sign Up</a></p>
         </form>
         
+        <button type="button" id="guest-button">Continue as Guest</button>
+        
         <form id="signup-form" style="display: none;">
-            <h3>Create Account</h3>
+            <h3>Create Account </h3>
             <label for="signup-username">Username:</label>
             <input type="text" id="signup-username" required><br>
             <label for="signup-password">Password:</label>
@@ -143,7 +194,11 @@
     </div>
 
     <div id="checklist-container" style="display: none;">
-        <button id="logout-button">Logout</button>
+        
+        <div id="top-controls">
+            <button id="logout-button">Logout</button>
+            <div id="guest-status" style="display: none;">Guest Mode (Local Only)</div>
+        </div>
         
         <h1>Hollow Knight Grub Checklist (46 Total)</h1>
 
@@ -179,10 +234,17 @@
         const logoutButton = document.getElementById('logout-button');
         const showSignupLink = document.getElementById('show-signup-link');
         const showLoginLink = document.getElementById('show-login-link');
-        // 💡 ADDED: Reference for the counter element
         const grubCounter = document.getElementById('grub-counter'); 
-        // 🔑 NEW: Reference for the new confirm password field
         const confirmPasswordField = document.getElementById('confirm-password'); 
+        
+        // 🔑 NEW: References for guest elements
+        const guestButton = document.getElementById('guest-button');
+        const guestStatus = document.getElementById('guest-status');
+        
+        // 🔑 NEW: State variable for Guest Mode
+        const GUEST_MODE_KEY = 'isGuest';
+        const GUEST_DATA_KEY = 'guestGrubData';
+        let isGuestMode = localStorage.getItem(GUEST_MODE_KEY) === 'true'; // Check initial state
         // --- End New Element References ---
 
 
@@ -191,7 +253,6 @@
             { area: "Forgotten Crossroads (5 Grubs)", list: [
                 "Grub 1: Defeat the Husk Guard.", "Grub 2: Found in the main cavern, relatively easy to reach.", "Grub 3: Found behind a breakable wall.", "Grub 4: Requires a Nail-bounce to reach.", "Grub 5: Requires the Mothwing Cloak (Dash) or a Nail-bounce."
             ]},
-            // ... (All other grub data entries) ...
             { area: "Greenpath (4 Grubs)", list: ["Grub 6: Requires throwing a moss block off a ledge.", "Grub 7: Found in a straightforward platforming section.", "Grub 8: Defeat the Moss Knight.", "Grub 9: Found in a challenging platforming area."]},
             { area: "Fungal Wastes (2 Grubs)", list: ["Grub 10: Requires the Mothwing Cloak (Dash).", "Grub 11: Requires the Mantis Claw (Wall Jump)."]},
             { area: "City of Tears (5 Grubs)", list: ["Grub 12: Found in a hidden area accessible without special movement abilities.", "Grub 13: Defeat the Great Husk Sentry.", "Grub 14: Requires Desolate Dive / Descending Dark to break a floor.", "Grub 15: Found in a straightforward section of the city.", "Grub 16: Requires Mantis Claw and Monarch Wings (Double Jump), or a difficult Nail-bounce."]},
@@ -214,12 +275,10 @@
         
         // 💡 NEW FUNCTION: Calculates and updates the rescued grub count
         function updateGrubCounter() {
-            // Selects all checked checkboxes whose IDs start with 'grub-'
             const rescuedGrubs = document.querySelectorAll('input[id^="grub-"]:checked');
             const rescuedCount = rescuedGrubs.length;
-            const totalGrubs = 46; // Total number of grubs in Hollow Knight
+            const totalGrubs = 46;
 
-            // Update the HTML element
             if (grubCounter) {
                 grubCounter.textContent = `Grubs Rescued: ${rescuedCount} / ${totalGrubs}`;
             }
@@ -233,18 +292,32 @@
                 'Content-Type': contentType,
             };
             if (token) {
-                // Critical: Format required by server's authMiddleware
                 headers['Authorization'] = `Bearer ${token}`;
             }
             return headers;
         }
 
-        // 🔑 ADDED: HANDLER - Logout function to clear token and show login
+        // 🔑 MODIFIED: HANDLER - Logout function to clear token, guest state, and show login
         function handleLogout() {
             localStorage.removeItem('jwtToken');
+            // 🔑 MODIFIED: Also remove guest state
+            localStorage.removeItem(GUEST_MODE_KEY);
+            isGuestMode = false;
+            
             checkAuthAndRenderUI();
             messageArea.textContent = 'You have been logged out.';
         }
+        
+        // 🔑 NEW: HANDLER - Set guest mode and render UI
+        function handleGuestAccess() {
+            isGuestMode = true;
+            localStorage.setItem(GUEST_MODE_KEY, 'true');
+            // 💡 As per the planned improvement, we don't clear local data here,
+            // the user should retain their local progress until they explicitly log in/sign up.
+            checkAuthAndRenderUI(); 
+            messageArea.textContent = ''; // Clear any prior login/signup messages
+        }
+
 
         // 🔑 ADDED: HANDLER - Toggles between login and signup forms
         function toggleAuthForms(showLogin) {
@@ -253,12 +326,21 @@
             messageArea.textContent = ''; 
         }
 
-        // 🔑 ADDED: CORE LOGIC - Checks for token and shows/hides UI
+        // 🔑 MODIFIED: CORE LOGIC - Checks for token/guest state and shows/hides UI
         function checkAuthAndRenderUI() {
-            if (localStorage.getItem('jwtToken')) {
+            const isAuthenticated = localStorage.getItem('jwtToken');
+            
+            // Re-check isGuestMode from localStorage if it hasn't been set in this session
+            isGuestMode = localStorage.getItem(GUEST_MODE_KEY) === 'true';
+
+            if (isAuthenticated || isGuestMode) {
                 authContainer.style.display = 'none';
                 checklistContainer.style.display = 'block';
-                initChecklist(); // Proceed to load data for the logged-in user
+                
+                // 🔑 NEW: Show guest status only if in guest mode
+                guestStatus.style.display = isGuestMode ? 'inline-block' : 'none';
+                
+                initChecklist(); // Proceed to load data for the user or guest
             } else {
                 authContainer.style.display = 'block';
                 checklistContainer.style.display = 'none';
@@ -271,13 +353,16 @@
         async function handleAuth(event, endpoint) {
             event.preventDefault();
             
+            // 🔑 NEW: If a user logs in or signs up, disable guest mode
+            localStorage.removeItem(GUEST_MODE_KEY);
+            isGuestMode = false;
+            
             const form = event.target;
             const username = form.elements[0].value; 
             const password = form.elements[1].value;
-            // 🔑 NEW: Get Confirm Password value only if it exists (i.e., on signup form)
             const confirmPassword = endpoint === 'signup' ? form.elements[2].value : null;
 
-            messageArea.textContent = ''; // Clear old messages
+            messageArea.textContent = '';
 
             // ✅ CLIENT-SIDE VALIDATION: Password Match for Signup
             if (endpoint === 'signup') {
@@ -287,7 +372,7 @@
                 }
                 if (password !== confirmPassword) {
                     messageArea.textContent = 'Error: Password and Confirm Password do not match!';
-                    return; // Stop execution, do not send the request
+                    return;
                 }
             }
             // ------------------------------------------
@@ -302,11 +387,10 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    localStorage.setItem('jwtToken', data.token); // Store the JWT!
+                    localStorage.setItem('jwtToken', data.token);
                     form.reset(); 
-                    checkAuthAndRenderUI(); // Show the checklist
+                    checkAuthAndRenderUI();
                 } else {
-                    // Catches server errors like "Username already taken" or "Invalid credentials"
                     messageArea.textContent = `Error: ${data.message}`;
                 }
             } catch (error) {
@@ -315,13 +399,29 @@
         }
 
         // --- Step A: Function to update the server (POST) ---
-        // 🔄 MODIFIED: Now uses the secure getAuthHeaders() and the new API route
+        // 🔄 MODIFIED: Handles updates to either the server (logged-in) or local storage (guest)
         async function updateServer(grubId, isChecked) {
+            
+            if (isGuestMode) {
+                // 🔑 GUEST MODE: Save to Local Storage instead of API
+                let guestData = {};
+                try {
+                    const storedData = localStorage.getItem(GUEST_DATA_KEY);
+                    guestData = storedData ? JSON.parse(storedData) : {};
+                } catch (e) {
+                    console.error("Error parsing guest data from local storage:", e);
+                }
+                
+                guestData[grubId] = isChecked;
+                localStorage.setItem(GUEST_DATA_KEY, JSON.stringify(guestData));
+                return;
+            }
+
+            // 🔑 LOGGED-IN MODE: Continue with server update logic
             try {
-                // Route changed from /api/update to /api/checklist
                 const response = await fetch(`${API_BASE_URL}/checklist`, { 
                     method: 'POST',
-                    headers: getAuthHeaders(), // 👈 ADDED: Secure headers
+                    headers: getAuthHeaders(),
                     body: JSON.stringify({ grubId, isChecked })
                 });
 
@@ -340,7 +440,6 @@
 
         // --- Step B: Function to build and render the checklist ---
         function renderChecklist(checkedGrubsFromServer) {
-            // Clear container before rendering new user's list
             container.innerHTML = ''; 
             grubIndex = 0; 
             
@@ -362,6 +461,7 @@
                     checkbox.type = 'checkbox';
                     checkbox.id = uniqueId;
                     
+                    // Check if the current grub is marked as checked from the loaded data
                     const isGrubChecked = checkedGrubsFromServer[uniqueId] === true;
                     if (isGrubChecked) {
                         checkbox.checked = true;
@@ -371,9 +471,9 @@
                     checkbox.addEventListener('change', (event) => {
                         const isChecked = event.target.checked;
                         li.classList.toggle('checked-item', isChecked);
+                        // 🔄 MODIFIED: updateServer now handles guest mode logic
                         updateServer(uniqueId, isChecked);
                         
-                        // 💡 ADDED: Update counter on every change
                         updateGrubCounter(); 
                     });
 
@@ -391,20 +491,33 @@
                 container.appendChild(areaDiv);
             });
             
-            // 💡 ADDED: Initial counter update after the checklist is built
             updateGrubCounter(); 
         }
 
         // --- Step C: Main function to fetch data and start rendering ---
-        // 🔄 MODIFIED: Now uses the secure getAuthHeaders() and handles 401 Unauthorized errors
+        // 🔄 MODIFIED: Now checks for guest mode and loads data from local storage if true
         async function initChecklist() {
+
+            // 🔑 NEW: Guest Mode data loading
+            if (isGuestMode) {
+                let checkedGrubs = {};
+                try {
+                    const storedData = localStorage.getItem(GUEST_DATA_KEY);
+                    checkedGrubs = storedData ? JSON.parse(storedData) : {};
+                } catch (e) {
+                    console.error("Could not parse guest grub data, starting fresh.", e);
+                }
+                renderChecklist(checkedGrubs);
+                return;
+            }
+
+            // 🔑 LOGGED-IN MODE: Continue with server fetch logic
             try {
                 const response = await fetch(`${API_BASE_URL}/checklist`, {
-                    headers: getAuthHeaders() // 👈 ADDED: Secure headers
+                    headers: getAuthHeaders()
                 });
                 
                 if (response.status === 401) {
-                    // Token is invalid/expired, force user back to login
                     handleLogout(); 
                     return;
                 }
@@ -418,7 +531,6 @@
 
             } catch (error) {
                 console.error('Initialization Error:', error);
-                // 🔄 MODIFIED: Adjusted error message for multi-user context
                 container.innerHTML = '<h2><span style="color: red;">[DATA ERROR]</span> Could not load checklist. Please check console for network details.</h2>';
             }
         }
@@ -441,6 +553,10 @@
         
         // Logout button listener
         logoutButton.addEventListener('click', handleLogout);
+        
+        // 🔑 NEW: Guest button listener
+        guestButton.addEventListener('click', handleGuestAccess);
+
 
         // Run the authentication check when the page loads
         checkAuthAndRenderUI();
