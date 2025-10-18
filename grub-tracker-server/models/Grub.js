@@ -1,15 +1,21 @@
-// grub-tracker-server/models/Grub.js
 const mongoose = require('mongoose');
 
-const GrubSchema = new mongoose.Schema({
-    // Fixed ID for simplicity (avoids needing a full login system)
-    userId: { type: String, required: true, unique: true }, 
-
-    // Map to store which grubs are checked (e.g., {"grub-1": true, "grub-2": false})
-    checkedGrubs: { 
-        type: Map, 
-        of: Boolean 
+const grubSchema = new mongoose.Schema({
+    // NEW FIELD: This is the user's ID (from the User model)
+    userId: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', // References the new User model
+        required: true,
+        unique: true // Ensures only one checklist document per user
+    },
+    
+    // This is the field that holds your grub status (was called checkedGrubs in your server.js)
+    checkedGrubs: {
+        type: Map,          
+        of: Boolean,        
+        default: {}
     }
-});
+}, { timestamps: true });
 
-module.exports = mongoose.model('Grub', GrubSchema);
+// Note: We keep the name 'Grub' here to match the import in server.js
+module.exports = mongoose.model('Grub', grubSchema);
