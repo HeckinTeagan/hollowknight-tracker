@@ -12,13 +12,22 @@
             padding: 20px;
             border: 1px solid #777;
             border-radius: 8px;
-            background-color: rgba(0, 0, 0, 0.85); /* Added dark opacity for readability */
+            background-color: rgba(0, 0, 0, 0.85);
             text-align: center;
         }
+        /* ✅ FIX: Ensure labels take up full width and stack */
+        #auth-container label {
+            display: block;
+            width: 90%; 
+            margin: 0 auto; /* Center the label text area */
+            text-align: left; /* Keep text aligned to the left */
+        }
+        /* ✅ MODIFIED: Inputs are now centered blocks */
         #auth-container input {
             width: 90%;
+            display: block; /* Ensure it is a block element */
+            margin: 8px auto; /* Center the input block horizontally */
             padding: 10px;
-            margin: 8px 0;
             border: 1px solid #555;
             background-color: #333;
             color: #eee;
@@ -125,6 +134,8 @@
             <input type="text" id="signup-username" required><br>
             <label for="signup-password">Password:</label>
             <input type="password" id="signup-password" required><br>
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" required><br>
             <button type="submit">Sign Up</button>
             <hr>
             <p>Already have an account? <a href="#" id="show-login-link">Login</a></p>
@@ -170,6 +181,8 @@
         const showLoginLink = document.getElementById('show-login-link');
         // 💡 ADDED: Reference for the counter element
         const grubCounter = document.getElementById('grub-counter'); 
+        // 🔑 NEW: Reference for the new confirm password field
+        const confirmPasswordField = document.getElementById('confirm-password'); 
         // --- End New Element References ---
 
 
@@ -261,14 +274,21 @@
             const form = event.target;
             const username = form.elements[0].value; 
             const password = form.elements[1].value;
+            // 🔑 NEW: Get Confirm Password value only if it exists (i.e., on signup form)
+            const confirmPassword = endpoint === 'signup' ? form.elements[2].value : null;
 
             messageArea.textContent = ''; // Clear old messages
 
-            // ✅ CLIENT-SIDE PASSWORD LENGTH VALIDATION (UX Improvement)
-            if (endpoint === 'signup' && password.length < 6) {
-                messageArea.textContent = 'Error: Password must be at least 6 characters long.';
-                // Stop execution, do not send the request to the server
-                return; 
+            // ✅ CLIENT-SIDE VALIDATION: Password Match for Signup
+            if (endpoint === 'signup') {
+                if (password.length < 6) {
+                    messageArea.textContent = 'Error: Password must be at least 6 characters long.';
+                    return; 
+                }
+                if (password !== confirmPassword) {
+                    messageArea.textContent = 'Error: Password and Confirm Password do not match!';
+                    return; // Stop execution, do not send the request
+                }
             }
             // ------------------------------------------
 
