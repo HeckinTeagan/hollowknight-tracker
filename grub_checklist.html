@@ -227,16 +227,23 @@
             }
         }
 
-        // 🔑 ADDED: HANDLER - Handles both login and signup form submissions
+        // 🔑 MODIFIED: HANDLER - Handles both login and signup form submissions with UX validation
         async function handleAuth(event, endpoint) {
             event.preventDefault();
             
             const form = event.target;
-            // Assuming the structure is: [button, username, password]
             const username = form.elements[0].value; 
             const password = form.elements[1].value;
 
-            messageArea.textContent = ''; 
+            messageArea.textContent = ''; // Clear old messages
+
+            // ✅ ADDED: CLIENT-SIDE PASSWORD LENGTH VALIDATION (UX Improvement)
+            if (endpoint === 'signup' && password.length < 6) {
+                messageArea.textContent = 'Error: Password must be at least 6 characters long.';
+                // Stop execution, do not send the request to the server
+                return; 
+            }
+            // ------------------------------------------
 
             try {
                 const response = await fetch(`${API_BASE_URL}/auth/${endpoint}`, {
@@ -252,6 +259,7 @@
                     form.reset(); 
                     checkAuthAndRenderUI(); // Show the checklist
                 } else {
+                    // Catches server errors like "Username already taken" or "Invalid credentials"
                     messageArea.textContent = `Error: ${data.message}`;
                 }
             } catch (error) {
@@ -289,7 +297,6 @@
             container.innerHTML = ''; 
             grubIndex = 0; 
             
-            // ... (Rest of function is unchanged) ...
             grubsData.forEach(areaData => {
                 const areaDiv = document.createElement('div');
                 areaDiv.className = 'grub-area';
