@@ -43,8 +43,19 @@ This project is deployed using a standard Jamstack architecture, ideal for a lig
 
 ---
 
-## 💡 Future Improvements
+## 💡 Future Improvements and Roadmap
 
-* **Guest Conversion:** Implement a feature to seamlessly transfer a Guest's local progress to the cloud when they sign up.
+The following enhancements are planned to improve the application's usability, security, and features:
+
+### Usability & Features
+* **Guest-to-Signed-Up Conversion:** Implement a seamless way to transfer a Guest's local progress to the cloud (MongoDB) when they choose to sign up.
+* **Personalized Welcome Message:** Display "Welcome back, \$USERNAME" in the top controls division after a successful login.
+* **Improved Login Error Feedback:** Provide clear, generic feedback (e.g., "Invalid credentials") to the user if the login attempt fails.
 * **Image Preview:** Generate a high-quality preview image for social media sharing cards.
-* **Code Quality:** Further refinement of API error handling and input validation.
+
+### Security & Maintenance
+* **CAPTCHA Implementation:** Integrate CAPTCHA into the login and sign-up forms to defend against bot and brute-force attacks.
+* **Rate Limiting Review:** Implement rate limiting on the authentication API routes (`/auth/login`, `/auth/signup`).
+* **Access Control Review:** Verify the backend logic to strictly ensure a user can only query or modify their own data.
+* **Secrets Check:** Confirm that all sensitive credentials (like the MongoDB URI and JWT Secret) are stored *only* as environment variables on Render.
+* **Admin Data Management Endpoint:** Create a secure, admin-protected API route on the backend to perform a cascading delete of a user and all their associated grub data.
